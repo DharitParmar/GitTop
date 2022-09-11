@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Github Star</string>
+
+    <string name="core_server_error_msg">Something went wrong on our end. Try again later</string>
+    <string name="core_network_error_msg">No internet found. Check connection and try again later</string>
+    <string name="git_repo_list_error">Cannot show repositories. Try again later</string>
+    <string name="git_repo_name">Name: %1$s</string>
+    <string name="git_repo_discription">Description: %1$s</string>
+    <string name="git_repo_score">Type: %1$s</string>
+    <string name="currency_item_value">Value: %1$s</string>
+</resources>

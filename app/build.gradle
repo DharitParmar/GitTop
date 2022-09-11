@@ -1,0 +1,87 @@
+import deps.Libraries
+import deps.Names
+import deps.Versions
+
+apply plugin: Libraries.Google.applicationPlugin
+apply plugin: Libraries.Google.Kotlin.androidPlugin
+apply plugin: Libraries.Google.Kotlin.parcelizePlugin
+apply plugin: Libraries.Google.Kotlin.kaptPlugin
+apply plugin: Libraries.Google.Hilt.pluginId
+apply plugin: Libraries.Androidx.Navigation.safeArgsPluginId
+
+android {
+    compileSdkVersion Versions.compileSdk
+    buildToolsVersion Versions.buildToolsVersion
+
+    defaultConfig {
+        applicationId Names.applicationId
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode 1
+        versionName Versions.appVersionName
+        testInstrumentationRunner Libraries.Androidx.Test.runnerJUnit
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = Versions.jvmTarget
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Versions.composeCompiler
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    // Androidx
+    implementation Libraries.Androidx.Activity.ktx
+    implementation Libraries.Androidx.Activity.compose
+    implementation Libraries.Androidx.Compose.material
+    implementation Libraries.Androidx.Compose.runtime
+    implementation Libraries.Androidx.Compose.ui
+    implementation Libraries.Androidx.Compose.uiToolingPreview
+    implementation Libraries.Androidx.Compose.uiUtil
+    implementation Libraries.Androidx.appcompat
+    implementation Libraries.Androidx.constraintLayout
+    implementation Libraries.Androidx.core
+    implementation Libraries.Androidx.fragment
+    implementation 'androidx.test.ext:junit-ktx:1.1.3'
+    kapt Libraries.Androidx.hiltCompiler
+    implementation Libraries.Androidx.Lifecycle.compose
+    implementation Libraries.Androidx.Lifecycle.runtime
+    implementation Libraries.Androidx.Lifecycle.viewModel
+    implementation Libraries.Androidx.Lifecycle.liveData
+
+    // Hilt
+    implementation Libraries.Google.Hilt.android
+    kapt Libraries.Google.Hilt.compiler
+
+    // Retrofit
+    implementation Libraries.Squareup.Retrofit.retrofit
+    implementation Libraries.Squareup.Retrofit.gson
+
+    // Timber
+    implementation Libraries.timber
+}
